@@ -25,9 +25,9 @@ export default function ProcessingPage() {
           flexShrink: 0,
         }}
       >
-        <div style={{ position: "absolute", inset: 0,       border: "2px dashed #A0A4AB", transform: "rotate(45deg)", opacity: 0.3 }} />
-        <div style={{ position: "absolute", inset: "5.25%", border: "2px dashed #A0A4AB", transform: "rotate(45deg)", opacity: 0.6 }} />
-        <div style={{ position: "absolute", inset: "10.5%", border: "2px dashed #A0A4AB", transform: "rotate(45deg)" }} />
+        <div className="diamond-spin-cw"  style={{ position: "absolute", inset: 0,       border: "2px dashed #A0A4AB", opacity: 0.3 }} />
+        <div className="diamond-spin-ccw" style={{ position: "absolute", inset: "5.25%", border: "2px dashed #A0A4AB", opacity: 0.6 }} />
+        <div className="diamond-spin-fast" style={{ position: "absolute", inset: "10.5%", border: "2px dashed #A0A4AB" }} />
 
         {/* PREPARING YOUR ANALYSIS ... — centered */}
         <div
