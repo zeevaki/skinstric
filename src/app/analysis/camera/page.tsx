@@ -89,20 +89,23 @@ export default function CameraPage() {
       {/* ── Loading overlay — sits on top until camera is ready ── */}
       {!ready && !denied && (
         <div className="absolute inset-0 flex flex-col items-center justify-center z-20" style={{ background: "#FCFCFC" }}>
-          <div style={{ position: "relative", width: "min(480px, 60vmin)", height: "min(480px, 60vmin)" }}>
-            <div style={{ position: "absolute", inset: 0, border: "1.5px dashed #A0A4AB", transform: "rotate(45deg)", opacity: 0.3 }} />
-            <div style={{ position: "absolute", inset: "8%", border: "1.5px dashed #A0A4AB", transform: "rotate(45deg)", opacity: 0.6 }} />
-            <div style={{ position: "absolute", inset: "16%", border: "1.5px dashed #A0A4AB", transform: "rotate(45deg)" }} />
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                <circle cx="40" cy="40" r="39" stroke="#1A1B1C" strokeWidth="1.5"/>
-                <circle cx="40" cy="40" r="33" fill="#1A1B1C"/>
-                <path fillRule="evenodd" clipRule="evenodd" d="M36.5 26.5C36.1 26.65 35 27.65 34.55 28.23C34.43 28.39 34.22 28.43 33.42 28.43C31.12 28.43 29.87 29.09 29.14 30.69L28.83 31.36V36.17C28.83 40.34 28.85 40.92 29.02 41.36C29.48 42.48 30.35 43.28 31.43 43.6C32.25 43.84 46.75 43.84 47.57 43.6C48.36 43.36 49.07 42.86 49.5 42.22C50.16 41.23 50.15 41.26 50.15 36.11V31.36L49.83 30.67C49.46 29.85 48.6 29.03 47.85 28.77C47.52 28.65 46.88 28.57 46.03 28.53L44.74 28.48L43.94 27.71C43.51 27.3 43.04 26.89 42.87 26.8C42.45 26.57 37.19 26.52 36.5 26.5ZM38.68 32.69C36.14 33.37 34.59 35.97 35.26 38.46C35.49 39.33 35.8 39.87 36.51 40.6C38.01 42.14 40.3 42.54 42.22 41.56C43 41.17 44.04 40.16 44.39 39.47C45.24 37.82 45.07 35.72 44 34.27C43.47 33.57 42.56 32.9 41.75 32.6C40.94 32.29 39.5 32.22 38.68 32.69Z" fill="#FCFCFC"/>
-              </svg>
-              <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C" }}>
-                Setting up camera ...
-              </p>
-            </div>
+          <div style={{ position: "relative", width: "min(740px, 80vmin)", height: "min(740px, 80vmin)", flexShrink: 0 }}>
+            <svg width="100%" height="100%" viewBox="0 0 740 740" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="369.891" cy="369.892" r="64.6429" stroke="#1A1B1C"/>
+              <circle cx="369.892" cy="369.892" r="57" fill="#1A1B1C"/>
+              <path d="M406.403 333.47C397.067 324.111 384.156 318.32 369.892 318.32C366.591 318.32 363.363 318.631 360.234 319.223C365.57 328.051 385.069 359.001 388.825 364.505C389.554 365.575 390.851 363.451 398.702 348.314L406.403 333.47Z" fill="#FCFCFC"/>
+              <path d="M321.931 350.897C328.071 335.408 341.496 323.601 357.979 319.703C359.93 322.63 363.657 328.413 367.731 334.853L378.08 351.217H348.529C334.268 351.217 325.933 351.124 321.931 350.897Z" fill="#FCFCFC"/>
+              <path d="M329.51 401.972C322.505 393.167 318.32 382.018 318.32 369.892C318.32 364.081 319.281 358.495 321.053 353.284H337.666C357.097 353.284 357.539 353.314 356.845 354.613C355.469 357.189 335.048 392.538 329.51 401.972Z" fill="#FCFCFC"/>
+              <path d="M379.91 420.491C376.67 421.129 373.32 421.463 369.892 421.463C354.459 421.463 340.609 414.684 331.158 403.941C333.2 399.404 338.519 389.934 347.73 374.376C348.597 372.911 349.475 371.883 349.681 372.089C349.887 372.295 357.154 383.885 365.831 397.842L379.91 420.491Z" fill="#FCFCFC"/>
+              <path d="M418.542 387.046C412.778 403.392 399.01 415.961 381.944 420.047C377.244 412.798 361.635 387.726 361.635 387.338C361.635 387.177 375.124 387.046 391.61 387.046H418.542Z" fill="#FCFCFC"/>
+              <path d="M407.781 334.906C416.274 344.099 421.463 356.389 421.463 369.892C421.463 375.394 420.601 380.695 419.006 385.668H401.852C390.707 385.668 381.588 385.5 381.588 385.294C381.588 384.868 403.909 341.968 407.781 334.906Z" fill="#FCFCFC"/>
+              <path opacity="0.3" d="M291.725 78.1674L661.617 291.725L448.059 661.617L78.1674 448.06L291.725 78.1674Z" stroke="#A0A4AB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="0.1 8"/>
+              <path opacity="0.6" d="M369.893 120.892L618.893 369.892L369.893 618.892L120.893 369.892L369.893 120.892Z" stroke="#A0A4AB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="0.1 8"/>
+              <path d="M422.326 174.204L565.579 422.326L317.458 565.579L174.204 317.458L422.326 174.204Z" stroke="#A0A4AB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="0.1 8"/>
+            </svg>
+            <p style={{ position: "absolute", left: "50%", top: "62%", transform: "translateX(-50%)", fontSize: 10, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", whiteSpace: "nowrap" }}>
+              Setting up camera ...
+            </p>
           </div>
           <div className="absolute flex flex-col items-center gap-2" style={{ bottom: "10%", left: "50%", transform: "translateX(-50%)" }}>
             <p style={{ fontSize: 10, fontWeight: 400, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.5, whiteSpace: "nowrap" }}>
