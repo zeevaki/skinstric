@@ -1,166 +1,138 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 
-const ANALYSIS = {
-  skinType: "Combination",
-  tone: "Medium / Fair",
-  ageRange: "24 – 30",
-  scores: [
-    { label: "Hydration",    value: 72 },
-    { label: "Oiliness",     value: 58 },
-    { label: "Sensitivity",  value: 35 },
-    { label: "Pigmentation", value: 28 },
-    { label: "Fine Lines",   value: 15 },
-  ],
-  concerns: ["Mild dehydration", "T-zone oiliness", "Minor sun exposure"],
-  routine: {
-    morning: ["Gentle foaming cleanser", "Hyaluronic acid serum", "Lightweight SPF 50 moisturiser"],
-    evening: ["Micellar cleansing oil", "Niacinamide 10% serum", "Barrier repair moisturiser"],
-  },
-};
-
-function ScoreBar({ label, value }: { label: string; value: number }) {
-  const [width, setWidth] = useState(0);
-  useEffect(() => { setTimeout(() => setWidth(value), 100); }, [value]);
-
-  return (
-    <div className="flex flex-col gap-1.5">
-      <div className="flex justify-between items-center">
-        <span className="text-[9px] font-medium tracking-[0.2em] uppercase text-[#1a1a1a]/60">{label}</span>
-        <span className="text-[9px] font-medium tracking-[0.1em] text-[#1a1a1a]">{value}%</span>
-      </div>
-      <div className="h-px w-full bg-[#1a1a1a]/10 relative">
-        <div
-          className="absolute top-0 left-0 h-px bg-[#1a1a1a] transition-all duration-1000 ease-out"
-          style={{ width: `${width}%` }}
-        />
-      </div>
-    </div>
-  );
-}
-
-function BackButton({ onClick }: { onClick: () => void }) {
-  return (
-    <div
-      onClick={onClick}
-      className="flex items-center gap-4 cursor-pointer select-none group"
-    >
-      <div className="relative flex items-center justify-center w-11 h-11 shrink-0">
-        <div className="absolute w-7 h-7 rotate-45 border border-[#1a1a1a]" />
-        <svg className="relative z-10" width="10" height="10" viewBox="0 0 10 10" fill="none">
-          <polyline points="7,1 3,5 7,9" stroke="#1a1a1a" strokeWidth="1.5" strokeLinecap="square" />
-        </svg>
-      </div>
-      <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#1a1a1a]">
-        Back to Home
-      </span>
-    </div>
-  );
-}
+const CATEGORIES = [
+  { label: "Demographics",      sub: null,              top: true  },
+  { label: "Skin Type\nDetails", sub: null,             left: true },
+  { label: "Cosmetic\nConcerns", sub: null,             right: true},
+  { label: "Weather",           sub: null,              bottom: true},
+];
 
 export default function ResultsPage() {
   const router = useRouter();
-  const [name, setName] = useState("");
-
-  useEffect(() => {
-    setName(sessionStorage.getItem("skinstric_name") ?? "");
-  }, []);
 
   return (
-    <main className="relative min-h-screen w-full bg-[#f5f3f0]">
-      <Header showEnterCode={false} section="Results" />
+    <main className="relative h-screen w-full overflow-hidden" style={{ background: "#FCFCFC" }}>
+      <Header showEnterCode={false} section="Analysis" />
 
-      <div className="pt-20 pb-16 px-8 md:px-12 max-w-5xl mx-auto">
+      {/* Top-left labels */}
+      <div className="absolute z-[1]" style={{ top: 86, left: 32 }}>
+        <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.5 }}>
+          A. I. Analysis
+        </p>
+        <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", marginTop: 4 }}>
+          A. I. has estimated the following.
+        </p>
+        <p style={{ fontSize: 11, fontWeight: 400, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.6 }}>
+          Fix estimated information if needed.
+        </p>
+      </div>
 
-        {/* Greeting */}
-        <div className="mb-10">
-          <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#1a1a1a]/40 mb-1">
-            Analysis Complete
-          </p>
-          <h1 className="text-[clamp(2rem,5vw,3.5rem)] font-[300] tracking-tight text-[#1a1a1a] leading-tight">
-            {name ? `Hello, ${name}.` : "Hello."}
-          </h1>
-          <p className="text-[11px] font-[300] tracking-wide text-[#1a1a1a]/50 mt-2 uppercase">
-            Your A.I. skin analysis is complete
-          </p>
+      {/* Diamond hub */}
+      <div
+        className="absolute"
+        style={{
+          left: "50%", top: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "min(520px, 70vmin)",
+          height: "min(520px, 70vmin)",
+        }}
+      >
+        {/* Outer dashed diamond */}
+        <div style={{ position: "absolute", inset: "-12%", border: "1.5px dashed #A0A4AB", transform: "rotate(45deg)", opacity: 0.3 }} />
+
+        {/* Top — Demographics (clickable, slightly larger) */}
+        <div
+          onClick={() => router.push("/analysis/demographics")}
+          className="cursor-pointer"
+          style={{
+            position: "absolute",
+            width: "42%", height: "42%",
+            top: "4%", left: "29%",
+            background: "#E8E8E8",
+            transform: "rotate(45deg)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}
+        >
+          <span style={{ transform: "rotate(-45deg)", fontSize: 11, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", textAlign: "center", color: "#1A1B1C" }}>
+            Demographics
+          </span>
         </div>
 
-        {/* Top grid: Skin Type + Demographics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#1a1a1a]/10 mb-px">
-          <div className="bg-[#f5f3f0] p-8 flex flex-col gap-3">
-            <p className="text-[9px] font-medium tracking-[0.2em] uppercase text-[#1a1a1a]/40">Skin Type</p>
-            <p className="text-[clamp(1.5rem,3vw,2.25rem)] font-[300] text-[#1a1a1a] tracking-tight">
-              {ANALYSIS.skinType}
-            </p>
-            <div className="flex gap-2 mt-auto flex-wrap">
-              {ANALYSIS.concerns.map((c) => (
-                <span key={c} className="text-[8px] font-medium tracking-[0.15em] uppercase text-[#1a1a1a]/50 border border-[#1a1a1a]/20 px-2 py-1">
-                  {c}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="bg-[#f5f3f0] p-8 flex flex-col gap-4">
-            <p className="text-[9px] font-medium tracking-[0.2em] uppercase text-[#1a1a1a]/40">Demographics</p>
-            <div className="flex flex-col gap-3">
-              <div>
-                <p className="text-[9px] font-medium tracking-[0.15em] uppercase text-[#1a1a1a]/40 mb-0.5">Estimated Age</p>
-                <p className="text-[1.5rem] font-[300] text-[#1a1a1a] tracking-tight">{ANALYSIS.ageRange}</p>
-              </div>
-              <div>
-                <p className="text-[9px] font-medium tracking-[0.15em] uppercase text-[#1a1a1a]/40 mb-0.5">Skin Tone</p>
-                <p className="text-[1.5rem] font-[300] text-[#1a1a1a] tracking-tight">{ANALYSIS.tone}</p>
-              </div>
-            </div>
-          </div>
+        {/* Left — Skin Type Details */}
+        <div
+          style={{
+            position: "absolute",
+            width: "42%", height: "42%",
+            top: "29%", left: "4%",
+            background: "#E8E8E8",
+            transform: "rotate(45deg)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}
+        >
+          <span style={{ transform: "rotate(-45deg)", fontSize: 11, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", textAlign: "center", color: "#1A1B1C" }}>
+            Skin Type{"\n"}Details
+          </span>
         </div>
 
-        {/* Scores */}
-        <div className="bg-[#f5f3f0] border-t border-[#1a1a1a]/10 p-8 flex flex-col gap-5 mb-px">
-          <p className="text-[9px] font-medium tracking-[0.2em] uppercase text-[#1a1a1a]/40">Skin Metrics</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-5">
-            {ANALYSIS.scores.map((s) => (
-              <ScoreBar key={s.label} label={s.label} value={s.value} />
-            ))}
-          </div>
+        {/* Right — Cosmetic Concerns */}
+        <div
+          style={{
+            position: "absolute",
+            width: "42%", height: "42%",
+            top: "29%", left: "54%",
+            background: "#E8E8E8",
+            transform: "rotate(45deg)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}
+        >
+          <span style={{ transform: "rotate(-45deg)", fontSize: 11, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", textAlign: "center", color: "#1A1B1C" }}>
+            Cosmetic{"\n"}Concerns
+          </span>
         </div>
 
-        {/* Routine */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#1a1a1a]/10 mb-12">
-          <div className="bg-[#f5f3f0] p-8 flex flex-col gap-4">
-            <p className="text-[9px] font-medium tracking-[0.2em] uppercase text-[#1a1a1a]/40">Morning Routine</p>
-            <ol className="flex flex-col gap-3">
-              {ANALYSIS.routine.morning.map((step, i) => (
-                <li key={i} className="flex items-start gap-4">
-                  <span className="text-[9px] font-medium tracking-[0.15em] text-[#1a1a1a]/30 shrink-0 mt-0.5">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-[11px] font-[300] text-[#1a1a1a] tracking-wide">{step}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          <div className="bg-[#f5f3f0] p-8 flex flex-col gap-4">
-            <p className="text-[9px] font-medium tracking-[0.2em] uppercase text-[#1a1a1a]/40">Evening Routine</p>
-            <ol className="flex flex-col gap-3">
-              {ANALYSIS.routine.evening.map((step, i) => (
-                <li key={i} className="flex items-start gap-4">
-                  <span className="text-[9px] font-medium tracking-[0.15em] text-[#1a1a1a]/30 shrink-0 mt-0.5">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-[11px] font-[300] text-[#1a1a1a] tracking-wide">{step}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
+        {/* Bottom — Weather */}
+        <div
+          style={{
+            position: "absolute",
+            width: "42%", height: "42%",
+            top: "54%", left: "29%",
+            background: "#E8E8E8",
+            transform: "rotate(45deg)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}
+        >
+          <span style={{ transform: "rotate(-45deg)", fontSize: 11, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", textAlign: "center", color: "#1A1B1C" }}>
+            Weather
+          </span>
         </div>
+      </div>
 
-        <BackButton onClick={() => router.push("/")} />
+      {/* BACK */}
+      <div
+        onClick={() => router.push("/analysis/select")}
+        className="absolute z-[1] flex items-center gap-4 cursor-pointer select-none nav-btn-bottom nav-btn-left" style={{ bottom: 48, left: 32 }}
+      >
+        <div className="flex items-center justify-center shrink-0" style={{ width: 44, height: 44, border: "1px solid #1A1B1C" }}>
+          <svg width="9" height="11" viewBox="0 0 9 11" fill="none">
+            <polygon points="9,0 0,5.5 9,11" fill="#1A1B1C" />
+          </svg>
+        </div>
+        <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.7 }}>Back</span>
+      </div>
+
+      {/* GET SUMMARY */}
+      <div
+        className="absolute z-[1] flex items-center gap-4 cursor-pointer select-none nav-btn-bottom nav-btn-right" style={{ bottom: 48, right: 32 }}
+      >
+        <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.7 }}>Get Summary</span>
+        <div className="flex items-center justify-center shrink-0" style={{ width: 44, height: 44, border: "1px solid #1A1B1C" }}>
+          <svg width="9" height="11" viewBox="0 0 9 11" fill="none">
+            <polygon points="0,0 9,5.5 0,11" fill="#1A1B1C" />
+          </svg>
+        </div>
       </div>
     </main>
   );

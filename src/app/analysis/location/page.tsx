@@ -8,11 +8,24 @@ export default function LocationPage() {
   const router = useRouter();
   const [location, setLocation] = useState("");
   const [focused, setFocused] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleProceed = () => {
+  const isValid = (val: string) => /^[a-zA-Z\s'-]+$/.test(val.trim()) && val.trim().length > 0;
+
+  const handleProceed = async () => {
     const l = location.trim();
-    if (!l) return;
+    if (!isValid(l)) return;
+    const name = sessionStorage.getItem("skinstric_name") ?? "";
+    setLoading(true);
+    try {
+      await fetch("https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, location: l }),
+      });
+    } catch { /* proceed regardless */ }
     sessionStorage.setItem("skinstric_location", l);
+    setLoading(false);
     router.push("/analysis/select");
   };
 
@@ -55,8 +68,7 @@ export default function LocationPage() {
       {/* BACK */}
       <div
         onClick={() => router.push("/analysis")}
-        className="absolute z-[1] flex items-center gap-4 cursor-pointer select-none"
-        style={{ bottom: 48, left: 32 }}
+        className="absolute z-[1] flex items-center gap-4 cursor-pointer select-none nav-btn-bottom nav-btn-left" style={{ bottom: 48, left: 32 }}
       >
         <div className="flex items-center justify-center shrink-0" style={{ width: 44, height: 44, border: "1px solid #1A1B1C" }}>
           <svg width="9" height="11" viewBox="0 0 9 11" fill="none">
@@ -66,12 +78,11 @@ export default function LocationPage() {
         <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.7 }}>Back</span>
       </div>
 
-      {/* PROCEED — only when location is typed */}
-      {location.trim() && (
+      {/* PROCEED — only when location is valid */}
+      {isValid(location) && !loading && (
         <div
           onClick={handleProceed}
-          className="absolute z-[1] flex items-center gap-4 cursor-pointer select-none"
-          style={{ bottom: 48, right: 32 }}
+          className="absolute z-[1] flex items-center gap-4 cursor-pointer select-none nav-btn-bottom nav-btn-right" style={{ bottom: 48, right: 32 }}
         >
           <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.7 }}>Proceed</span>
           <div className="flex items-center justify-center shrink-0" style={{ width: 44, height: 44, border: "1px solid #1A1B1C" }}>

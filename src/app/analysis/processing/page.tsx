@@ -7,8 +7,39 @@ export default function ProcessingPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const timeout = setTimeout(() => router.push("/analysis/results"), 4000);
-    return () => clearTimeout(timeout);
+    const MIN_DISPLAY = 3000;
+    const start = Date.now();
+
+    const run = async () => {
+      const dataUrl = sessionStorage.getItem("skinstric_image") ?? "";
+      const base64 = dataUrl.includes(",") ? dataUrl.split(",")[1] : dataUrl;
+
+      let result = null;
+      if (base64) {
+        try {
+          const res = await fetch(
+            "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ image: base64 }),
+            }
+          );
+          const json = await res.json();
+          result = json.data ?? null;
+        } catch { /* fall through with null result */ }
+      }
+
+      if (result) {
+        sessionStorage.setItem("skinstric_analysis", JSON.stringify(result));
+      }
+
+      const elapsed = Date.now() - start;
+      const remaining = Math.max(0, MIN_DISPLAY - elapsed);
+      setTimeout(() => router.push("/analysis/results"), remaining);
+    };
+
+    run();
   }, [router]);
 
   return (

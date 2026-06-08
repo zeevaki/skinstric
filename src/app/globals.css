@@ -47,3 +47,19 @@ body {
 .diamond-spin-cw  { animation: spin-cw  6s linear infinite; transform-origin: center; transform-box: fill-box; }
 .diamond-spin-ccw { animation: spin-ccw 9s linear infinite; transform-origin: center; transform-box: fill-box; }
 .diamond-spin-fast { animation: spin-cw 4s linear infinite; transform-origin: center; transform-box: fill-box; }
+
+/* ── Responsive: nav buttons ── */
+@media (max-width: 639px) {
+  .nav-btn-bottom { bottom: 24px !important; }
+  .nav-btn-left   { left: 16px !important; }
+  .nav-btn-right  { right: 16px !important; }
+}
+
+/* ── Demographics: mobile stacked layout ── */
+@media (max-width: 767px) {
+  .demo-sidebar   { position: static !important; width: 100% !important; transform: none !important; flex-direction: row !important; border-right: none !important; border-bottom: 1px solid #E8E8E8; overflow-x: auto; }
+  .demo-center    { position: static !important; transform: none !important; padding: 24px 16px !important; left: auto !important; right: auto !important; }
+  .demo-right     { position: static !important; transform: none !important; width: 100% !important; max-height: none !important; border-left: none !important; border-top: 1px solid #E8E8E8; }
+  .demo-layout    { display: flex; flex-direction: column; height: auto; min-height: 100vh; padding-top: 120px; overflow-y: auto; }
+  .demo-chart-wrap { display: none; }
+}

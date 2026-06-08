@@ -52,9 +52,11 @@ export default function AnalysisPage() {
   const [focused, setFocused] = useState(false);
   const [modal, setModal] = useState<"none" | "confirm" | "sad">("none");
 
+  const isValid = (val: string) => /^[a-zA-Z\s'-]+$/.test(val.trim()) && val.trim().length > 0;
+
   const handleProceed = () => {
     const n = name.trim();
-    if (!n) return;
+    if (!isValid(n)) return;
     sessionStorage.setItem("skinstric_name", n);
     router.push("/analysis/location");
   };
@@ -108,8 +110,7 @@ export default function AnalysisPage() {
       {/* BACK */}
       <div
         onClick={() => name.trim() ? setModal("confirm") : router.push("/intro")}
-        className="absolute z-[1] flex items-center gap-4 cursor-pointer select-none"
-        style={{ bottom: 48, left: 32 }}
+        className="absolute z-[1] flex items-center gap-4 cursor-pointer select-none nav-btn-bottom nav-btn-left" style={{ bottom: 48, left: 32 }}
       >
         <div className="flex items-center justify-center shrink-0" style={{ width: 44, height: 44, border: "1px solid #1A1B1C" }}>
           <svg width="9" height="11" viewBox="0 0 9 11" fill="none">
@@ -119,12 +120,11 @@ export default function AnalysisPage() {
         <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.7 }}>Back</span>
       </div>
 
-      {/* PROCEED — only when name is typed */}
-      {name.trim() && (
+      {/* PROCEED — only when name is valid */}
+      {isValid(name) && (
         <div
           onClick={handleProceed}
-          className="absolute z-[1] flex items-center gap-4 cursor-pointer select-none"
-          style={{ bottom: 48, right: 32 }}
+          className="absolute z-[1] flex items-center gap-4 cursor-pointer select-none nav-btn-bottom nav-btn-right" style={{ bottom: 48, right: 32 }}
         >
           <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.7 }}>Proceed</span>
           <div className="flex items-center justify-center shrink-0" style={{ width: 44, height: 44, border: "1px solid #1A1B1C" }}>
