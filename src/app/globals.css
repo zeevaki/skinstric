@@ -48,6 +48,34 @@ body {
 .diamond-spin-ccw { animation: spin-ccw 9s linear infinite; transform-origin: center; transform-box: fill-box; }
 .diamond-spin-fast { animation: spin-cw 4s linear infinite; transform-origin: center; transform-box: fill-box; }
 
+/* ── Loading dots ── */
+@keyframes dot-pulse {
+  0%, 80%, 100% { opacity: 0.25; transform: scale(0.75); }
+  40%            { opacity: 1;    transform: scale(1); }
+}
+.dot-1 { animation: dot-pulse 1.4s ease-in-out 0s   infinite; }
+.dot-2 { animation: dot-pulse 1.4s ease-in-out 0.2s infinite; }
+.dot-3 { animation: dot-pulse 1.4s ease-in-out 0.4s infinite; }
+
+/* ── Analysis page diamonds: slow CW spin starting at 45° ── */
+@keyframes spin-slow-45 {
+  from { transform: rotate(45deg); }
+  to   { transform: rotate(405deg); }
+}
+.diamond-slow-a { animation: spin-slow-45  50s linear infinite; transform-origin: center; }
+.diamond-slow-b { animation: spin-slow-45  70s linear infinite; transform-origin: center; }
+.diamond-slow-c { animation: spin-slow-45  85s linear infinite; transform-origin: center; }
+
+/* ── Diamond nav button hover ── */
+.nav-diamond-btn {
+  color: #1A1B1C;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-diamond-btn:hover {
+  background: #1A1B1C;
+  color: #FCFCFC;
+}
+
 /* ── Responsive: nav buttons ── */
 @media (max-width: 639px) {
   .nav-btn-bottom { bottom: 24px !important; }

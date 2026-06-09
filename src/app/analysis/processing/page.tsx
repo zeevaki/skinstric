@@ -36,7 +36,7 @@ export default function ProcessingPage() {
 
       const elapsed = Date.now() - start;
       const remaining = Math.max(0, MIN_DISPLAY - elapsed);
-      setTimeout(() => router.push("/analysis/results"), remaining);
+      setTimeout(() => router.push("/analysis/demographics"), remaining);
     };
 
     run();

@@ -12,13 +12,9 @@ export default function Header({ showEnterCode = true, section = "Intro" }: Head
             Skinstric
           </span>
 
-          <div className="flex items-center gap-[6px]" style={{ opacity: 0.6 }}>
-            <div style={{ width: 4, height: 17, border: "1px solid #1A1B1C", borderRadius: 2, flexShrink: 0 }} />
-            <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C" }}>
-              {section}
-            </span>
-            <div style={{ width: 4, height: 17, border: "1px solid #1A1B1C", borderRadius: 2, flexShrink: 0, transform: "scaleX(-1)" }} />
-          </div>
+          <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.6 }}>
+            [ {section} ]
+          </span>
         </div>
 
         {showEnterCode && (

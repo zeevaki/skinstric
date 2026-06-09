@@ -121,8 +121,8 @@ export default function CameraPage() {
             </div>
           </div>
           <div onClick={back} className="absolute flex items-center gap-4 cursor-pointer select-none" style={{ bottom: 48, left: 32 }}>
-            <div style={{ width: 44, height: 44, border: "1px solid #1A1B1C", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <svg width="9" height="11" viewBox="0 0 9 11" fill="none"><polygon points="9,0 0,5.5 9,11" fill="#1A1B1C" /></svg>
+            <div className="nav-diamond-btn" style={{ width: 44, height: 44, border: "1px solid #1A1B1C", display: "flex", alignItems: "center", justifyContent: "center", transform: "rotate(45deg)" }}>
+              <svg width="9" height="11" viewBox="0 0 9 11" fill="none" style={{ transform: "rotate(-45deg)" }}><polygon points="9,0 0,5.5 9,11" fill="currentColor" /></svg>
             </div>
             <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.7 }}>Back</span>
           </div>
@@ -136,8 +136,8 @@ export default function CameraPage() {
             Camera access denied.<br />Check browser &amp; Windows camera settings.
           </p>
           <div onClick={back} className="absolute flex items-center gap-4 cursor-pointer select-none" style={{ bottom: 48, left: 32 }}>
-            <div style={{ width: 44, height: 44, border: "1px solid #1A1B1C", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <svg width="9" height="11" viewBox="0 0 9 11" fill="none"><polygon points="9,0 0,5.5 9,11" fill="#1A1B1C" /></svg>
+            <div className="nav-diamond-btn" style={{ width: 44, height: 44, border: "1px solid #1A1B1C", display: "flex", alignItems: "center", justifyContent: "center", transform: "rotate(45deg)" }}>
+              <svg width="9" height="11" viewBox="0 0 9 11" fill="none" style={{ transform: "rotate(-45deg)" }}><polygon points="9,0 0,5.5 9,11" fill="currentColor" /></svg>
             </div>
             <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.7 }}>Back</span>
           </div>
@@ -228,16 +228,16 @@ export default function CameraPage() {
           {captured && (
             <div onClick={() => router.push("/analysis/processing")} className="absolute z-[3] flex items-center gap-4 cursor-pointer select-none" style={{ bottom: 48, right: 32 }}>
               <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#FCFCFC", opacity: 0.7 }}>Proceed</span>
-              <div style={{ width: 44, height: 44, border: "1px solid rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <svg width="9" height="11" viewBox="0 0 9 11" fill="none"><polygon points="0,0 9,5.5 0,11" fill="#FCFCFC" /></svg>
+              <div style={{ width: 44, height: 44, border: "1px solid rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center", transform: "rotate(45deg)" }}>
+                <svg width="9" height="11" viewBox="0 0 9 11" fill="none" style={{ transform: "rotate(-45deg)" }}><polygon points="0,0 9,5.5 0,11" fill="#FCFCFC" /></svg>
               </div>
             </div>
           )}
 
           {/* Back */}
           <div onClick={back} className="absolute z-[3] flex items-center gap-4 cursor-pointer select-none" style={{ bottom: 48, left: 32 }}>
-            <div style={{ width: 44, height: 44, border: "1px solid rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <svg width="9" height="11" viewBox="0 0 9 11" fill="none"><polygon points="9,0 0,5.5 9,11" fill="#FCFCFC" /></svg>
+            <div style={{ width: 44, height: 44, border: "1px solid rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center", transform: "rotate(45deg)" }}>
+              <svg width="9" height="11" viewBox="0 0 9 11" fill="none" style={{ transform: "rotate(-45deg)" }}><polygon points="9,0 0,5.5 9,11" fill="#FCFCFC" /></svg>
             </div>
             <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#FCFCFC", opacity: 0.7 }}>Back</span>
           </div>

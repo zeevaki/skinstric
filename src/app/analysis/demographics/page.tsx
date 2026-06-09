@@ -218,8 +218,8 @@ export default function DemographicsPage() {
       <div onClick={() => router.push("/analysis/results")}
         className="fixed md:absolute z-[10] flex items-center gap-3 cursor-pointer select-none nav-btn-bottom nav-btn-left"
         style={{ bottom: 48, left: 32 }}>
-        <div className="flex items-center justify-center shrink-0" style={{ width: 44, height: 44, border: "1px solid #1A1B1C" }}>
-          <svg width="9" height="11" viewBox="0 0 9 11" fill="none"><polygon points="9,0 0,5.5 9,11" fill="#1A1B1C" /></svg>
+        <div className="nav-diamond-btn flex items-center justify-center shrink-0" style={{ width: 44, height: 44, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }}>
+          <svg width="9" height="11" viewBox="0 0 9 11" fill="none" style={{ transform: "rotate(-45deg)" }}><polygon points="9,0 0,5.5 9,11" fill="currentColor" /></svg>
         </div>
         <span className="hidden sm:inline" style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.7 }}>Back</span>
       </div>

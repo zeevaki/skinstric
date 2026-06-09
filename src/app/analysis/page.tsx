@@ -84,9 +84,9 @@ export default function AnalysisPage() {
 
       {/* 3 concentric diamonds */}
       <div style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)", width: "min(762px, 80vmin)", height: "min(762px, 80vmin)" }}>
-        <div style={{ position: "absolute", inset: 0,       border: "2px dashed #A0A4AB", transform: "rotate(45deg)", opacity: 0.3 }} />
-        <div style={{ position: "absolute", inset: "5.25%", border: "2px dashed #A0A4AB", transform: "rotate(45deg)", opacity: 0.6 }} />
-        <div style={{ position: "absolute", inset: "10.5%", border: "2px dashed #A0A4AB", transform: "rotate(45deg)" }} />
+        <div className="diamond-slow-a" style={{ position: "absolute", inset: 0,       border: "2px dashed #A0A4AB", opacity: 0.3 }} />
+        <div className="diamond-slow-b" style={{ position: "absolute", inset: "5.25%", border: "2px dashed #A0A4AB", opacity: 0.6 }} />
+        <div className="diamond-slow-c" style={{ position: "absolute", inset: "10.5%", border: "2px dashed #A0A4AB" }} />
       </div>
 
       {/* Input */}
@@ -112,9 +112,9 @@ export default function AnalysisPage() {
         onClick={() => name.trim() ? setModal("confirm") : router.push("/intro")}
         className="absolute z-[1] flex items-center gap-4 cursor-pointer select-none nav-btn-bottom nav-btn-left" style={{ bottom: 48, left: 32 }}
       >
-        <div className="flex items-center justify-center shrink-0" style={{ width: 44, height: 44, border: "1px solid #1A1B1C" }}>
-          <svg width="9" height="11" viewBox="0 0 9 11" fill="none">
-            <polygon points="9,0 0,5.5 9,11" fill="#1A1B1C" />
+        <div className="nav-diamond-btn flex items-center justify-center shrink-0" style={{ width: 44, height: 44, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }}>
+          <svg width="9" height="11" viewBox="0 0 9 11" fill="none" style={{ transform: "rotate(-45deg)" }}>
+            <polygon points="9,0 0,5.5 9,11" fill="currentColor" />
           </svg>
         </div>
         <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.7 }}>Back</span>
@@ -127,9 +127,9 @@ export default function AnalysisPage() {
           className="absolute z-[1] flex items-center gap-4 cursor-pointer select-none nav-btn-bottom nav-btn-right" style={{ bottom: 48, right: 32 }}
         >
           <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#1A1B1C", opacity: 0.7 }}>Proceed</span>
-          <div className="flex items-center justify-center shrink-0" style={{ width: 44, height: 44, border: "1px solid #1A1B1C" }}>
-            <svg width="9" height="11" viewBox="0 0 9 11" fill="none">
-              <polygon points="0,0 9,5.5 0,11" fill="#1A1B1C" />
+          <div className="nav-diamond-btn flex items-center justify-center shrink-0" style={{ width: 44, height: 44, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }}>
+            <svg width="9" height="11" viewBox="0 0 9 11" fill="none" style={{ transform: "rotate(-45deg)" }}>
+              <polygon points="0,0 9,5.5 0,11" fill="currentColor" />
             </svg>
           </div>
         </div>
